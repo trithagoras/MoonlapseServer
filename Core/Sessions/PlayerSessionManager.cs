@@ -1,9 +1,7 @@
-﻿
-using MmoNet.Core.Sessions;
+﻿using MmoNet.Core.Sessions;
 
 namespace MoonlapseServer.Core.Sessions;
 public class PlayerSessionManager : IPlayerSessionManager {
-
     readonly Dictionary<Guid, ISession> sessions = [];
 
     public ISession this[Guid id] {

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="MmoNet.Core" Version="0.1.0" />
+    <PackageReference Include="MmoNet.Core" Version="0.2.3" />
   </ItemGroup>
 
   <ItemGroup>
