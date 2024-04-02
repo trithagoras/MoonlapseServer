@@ -1,3 +1,6 @@
+moonlapse.db
+.env
+
 # remove this eventually
 Migrations
 
