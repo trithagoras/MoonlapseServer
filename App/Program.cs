@@ -9,10 +9,17 @@ using MoonlapseServer.Core.Extensions;
 using MoonlapseServer.Core.Services;
 using MoonlapseServer.Data;
 
-// configuring database connection
+// loading environment variables and setting debug mode
 DotEnv.Load();
+var env = DotEnv.Read();
+var debug = false;
+if (env.TryGetValue("DEBUG", out var debugValue)) {
+    bool.TryParse(debugValue, out debug);
+}
+
+// configuring database connection
 var onConfigure = (DbContextOptionsBuilder optionsBuilder) => {
-    var connectionString = DotEnv.Read()["CONNECTION_STRING"];
+    var connectionString = env["CONNECTION_STRING"];
     optionsBuilder.UseSqlite(connectionString);
     optionsBuilder.UseLazyLoadingProxies();
 };
@@ -20,7 +27,7 @@ var onConfigure = (DbContextOptionsBuilder optionsBuilder) => {
 var serverBuilder = new ServerBuilder();
 serverBuilder.Services.AddProtocolLayer<TcpLayer>();
 serverBuilder.Services.AddSerializer<JsonSerializer>();
-serverBuilder.Services.AddPlayerSessionManager(debug: true);
+serverBuilder.Services.AddPlayerSessionManager(debug);
 serverBuilder.Services.AddSingleton<ILoginService, LoginService>();
 serverBuilder.Services.AddDbContext<MoonlapseDbContext>(onConfigure);
 serverBuilder.Services.AddExceptionFilter<MoonlapseExceptionFilter>();
