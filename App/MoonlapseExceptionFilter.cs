@@ -17,7 +17,7 @@ public class MoonlapseExceptionFilter(IProtocolLayer protocol, ILogger<Moonlapse
                     SessionId = ctx.Session.Id,
                     Result = entryEx.Message
                 });
-                break;
+                return;
             default:
                 logger.LogError(ctx.Exception, "An internal error was caught by the ExceptionFilter for session {s}.", ctx.Session.Id);
                 break;
