@@ -18,6 +18,12 @@ public class ExceptionFilter(IProtocolLayer protocol, ILogger<ExceptionFilter> l
                     Result = entryEx.Message
                 });
                 break;
+            case InvalidStateException invalidStateException:
+                protocol.SendAsync(ctx.Session, new DenyPacket {
+                    SessionId = ctx.Session.Id,
+                    Result = invalidStateException.Message
+                });
+                break;
             default:
                 logger.LogError(ctx.Exception, "An internal error was caught by the ExceptionFilter for session {s}.", ctx.Session.Id);
                 protocol.SendAsync(ctx.Session, new DenyPacket {

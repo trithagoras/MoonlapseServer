@@ -1,5 +1,6 @@
 ﻿using MoonlapseServer.Core.Exceptions;
 using MoonlapseServer.Core.Sessions;
+using MoonlapseServer.Core.Sessions.States;
 using MoonlapseServer.Data.Areas.Entry;
 using MoonlapseServer.Data.Areas.Entry.Models;
 
@@ -9,29 +10,19 @@ public class LoginService(IPlayerSessionManager sessionManager, EntryContext db)
     readonly EntryContext db = db;
 
     public async Task LoginAsync(PlayerSession session, string username, string password) {
-        // check if already logged in
-        if (session.LoggedIn) {
-            throw new EntryException("Already logged in.");
-        }
         // Check if the username exists
         var user = db.Users.FirstOrDefault(u => u.Username == username) ?? throw new EntryException("Username or password is incorrect.");
 
         // Check if the password is correct
         if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) {
-            //return new LoginResult(false, "Username or password is incorrect.");
             throw new EntryException("Username or password is incorrect.");
         }
 
-        // Create a new session TODO: pass user info into session
-        session.Login();
+        session.ChangeState<PlayState>();
     }
 
     public async Task LogoutAsync(PlayerSession session) {
-        // Check if already logged out
-        if (!session.LoggedIn) {
-            throw new EntryException("Not logged in.");
-        }
-        session.Logout();
+        session.ChangeState<EntryState>();
     }
 
     public async Task RegisterAsync(string username, string password) {
