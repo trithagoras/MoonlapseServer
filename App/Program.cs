@@ -29,6 +29,7 @@ serverBuilder.Services.AddProtocolLayer<TcpLayer>();
 serverBuilder.Services.AddSerializer<JsonSerializer>();
 serverBuilder.Services.AddPlayerSessionManager(debug);
 serverBuilder.Services.AddSingleton<ILoginService, LoginService>();
+serverBuilder.Services.AddSingleton<IMovementService, MovementService>();
 serverBuilder.Services.AddDbContext<MoonlapseDbContext>(onConfigure);
 serverBuilder.Services.AddExceptionFilter<MoonlapseExceptionFilter>();
 

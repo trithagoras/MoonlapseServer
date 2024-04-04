@@ -14,9 +14,4 @@ public class PlayerSession(Guid id) : ISession {
     public void ChangeState<TState>() where TState : ISessionState, new() {
         State = new TState();
     }
-
-    public void Translate(Vector2 offset) {
-        Instance.X += offset.X;
-        Instance.Y += offset.Y;
-    }
 }
