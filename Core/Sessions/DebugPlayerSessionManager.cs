@@ -3,7 +3,7 @@
 namespace MoonlapseServer.Core.Sessions;
 public class DebugPlayerSessionManager : IPlayerSessionManager {
     readonly Dictionary<Guid, ISession> sessions = [];
-    static int seed = 1;
+    int Seed => 1 + sessions.Count;
 
     public ISession this[Guid id] {
         get {
@@ -20,7 +20,7 @@ public class DebugPlayerSessionManager : IPlayerSessionManager {
     public IEnumerable<ISession> Sessions => sessions.Values;
 
     public ISession CreateSession() {
-        var guid = GenerateSeededGuid(seed);
+        var guid = GenerateSeededGuid(Seed);
         var session = new PlayerSession(guid);
         sessions.Add(guid, session);
         return session;
@@ -34,7 +34,6 @@ public class DebugPlayerSessionManager : IPlayerSessionManager {
         var r = new Random(seed);
         var guid = new byte[16];
         r.NextBytes(guid);
-        DebugPlayerSessionManager.seed++;
 
         return new Guid(guid);
     }
