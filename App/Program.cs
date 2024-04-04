@@ -20,7 +20,7 @@ var onConfigure = (DbContextOptionsBuilder optionsBuilder) => {
 var serverBuilder = new ServerBuilder();
 serverBuilder.Services.AddProtocolLayer<TcpLayer>();
 serverBuilder.Services.AddSerializer<JsonSerializer>();
-serverBuilder.Services.AddPlayerSessionManager();
+serverBuilder.Services.AddPlayerSessionManager(debug: true);
 serverBuilder.Services.AddSingleton<ILoginService, LoginService>();
 serverBuilder.Services.AddDbContext<MoonlapseDbContext>(onConfigure);
 serverBuilder.Services.AddExceptionFilter<MoonlapseExceptionFilter>();
