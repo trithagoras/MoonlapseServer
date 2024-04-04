@@ -23,7 +23,7 @@ serverBuilder.Services.AddSerializer<JsonSerializer>();
 serverBuilder.Services.AddPlayerSessionManager();
 serverBuilder.Services.AddSingleton<ILoginService, LoginService>();
 serverBuilder.Services.AddDbContext<EntryContext>(onConfigure);
-serverBuilder.Services.AddExceptionFilter<ExceptionFilter>();
+serverBuilder.Services.AddExceptionFilter<MoonlapseExceptionFilter>();
 
 var (app, _) = serverBuilder.Build();
 await app.StartAsync(42523);
