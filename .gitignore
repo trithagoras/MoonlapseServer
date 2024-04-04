@@ -1,4 +1,5 @@
 moonlapse.db
+moonlapse.db*
 .env
 
 # remove this eventually
