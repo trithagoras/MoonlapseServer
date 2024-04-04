@@ -1,23 +1,24 @@
 ﻿using MoonlapseServer.Core.Exceptions;
 using MoonlapseServer.Core.Sessions;
 using MoonlapseServer.Core.Sessions.States;
-using MoonlapseServer.Data.Areas.Entry;
-using MoonlapseServer.Data.Areas.Entry.Models;
+using MoonlapseServer.Data;
+using MoonlapseServer.Data.Models;
 
 namespace MoonlapseServer.Core.Services;
-public class LoginService(IPlayerSessionManager sessionManager, EntryContext db) : ILoginService {
+public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbContext db) : ILoginService {
     readonly IPlayerSessionManager sessionManager = sessionManager;
-    readonly EntryContext db = db;
+    readonly MoonlapseDbContext db = db;
 
     public async Task LoginAsync(PlayerSession session, string username, string password) {
-        // Check if the username exists
+        // check if the username exists
         var user = db.Users.FirstOrDefault(u => u.Username == username) ?? throw new EntryException("Username or password is incorrect.");
 
-        // Check if the password is correct
+        // check if the password is correct
         if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) {
             throw new EntryException("Username or password is incorrect.");
         }
 
+        session.Player = user.Player;
         session.ChangeState<PlayState>();
     }
 
@@ -26,18 +27,32 @@ public class LoginService(IPlayerSessionManager sessionManager, EntryContext db)
     }
 
     public async Task RegisterAsync(string username, string password) {
-        // Check if the username is already taken
+        // check if the username is already taken
         var user = db.Users.FirstOrDefault(u => u.Username == username);
         if (user != null) {
             throw new EntryException($"Username: {username} is already taken.");
         }
 
-        // Hash the password
+        // hash the password
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
         db.Users.Add(new User {
             Username = username,
-            PasswordHash = hashedPassword
+            PasswordHash = hashedPassword,
+            Player = CreatePlayer(username)
         });
         db.SaveChanges();
+    }
+
+    Player CreatePlayer(string username) {
+        return new Player {
+            InstancedEntity = new InstancedEntity {
+                Entity = new Entity {
+                    Name = username
+                },
+                X = 0,
+                Y = 0
+            }
+        };
     }
 }

@@ -17,8 +17,8 @@ public class PlayController : Controller {
         // return authoritive position packet
         return new PositionPacket {
             SessionId = session.Id,
-            X = session.Position.X,
-            Y = session.Position.Y
+            X = session.Instance.X,
+            Y = session.Instance.Y
         };
     }
 }
