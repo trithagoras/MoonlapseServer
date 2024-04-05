@@ -1,7 +1,7 @@
-﻿using MoonlapseServer.Data;
+﻿using MoonlapseServer.Data.DbContexts;
 using MoonlapseServer.Data.Models;
 
-namespace MoonlapseServer.Core.Services; 
+namespace MoonlapseServer.Core.Services;
 public class MovementService(MoonlapseDbContext db) : IMovementService {
     readonly MoonlapseDbContext db = db;
     public void Translate(InstancedEntity instance, float dx, float dy) {

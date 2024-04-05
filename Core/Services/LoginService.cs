@@ -1,7 +1,7 @@
 ﻿using MoonlapseServer.Core.Exceptions;
 using MoonlapseServer.Core.Sessions;
 using MoonlapseServer.Core.Sessions.States;
-using MoonlapseServer.Data;
+using MoonlapseServer.Data.DbContexts;
 using MoonlapseServer.Data.Models;
 
 namespace MoonlapseServer.Core.Services;

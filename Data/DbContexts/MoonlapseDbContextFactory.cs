@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace MoonlapseServer.Data;
+namespace MoonlapseServer.Data.DbContexts;
 public class MoonlapseDbContextFactory : IDesignTimeDbContextFactory<MoonlapseDbContext> {
     public MoonlapseDbContext CreateDbContext(string[] args) {
         DotEnv.Load();
