@@ -13,9 +13,9 @@ using MoonlapseServer.Data;
 DotEnv.Load();
 var env = DotEnv.Read();
 var debug = false;
-if (env.TryGetValue("DEBUG", out var debugValue)) {
-    bool.TryParse(debugValue, out debug);
-}
+#if DEBUG
+    debug = true;
+#endif
 
 // configuring database connection
 var onConfigure = (DbContextOptionsBuilder optionsBuilder) => {
