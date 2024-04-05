@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MmoNet.Core.Sessions;
-using MoonlapseServer.Core.Sessions;
+using Moonlapse.Core.Sessions;
 
-namespace MoonlapseServer.Core.Extensions; 
+namespace Moonlapse.Core.Extensions; 
 public static class ServiceCollectionExtensions {
     public static ServiceCollection AddPlayerSessionManager(this ServiceCollection services, bool debug = false) {
         if (debug) {

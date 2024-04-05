@@ -2,12 +2,12 @@
 using MmoNet.Core.Sessions;
 using MmoNet.Core.States;
 using MmoNet.Shared.Packets;
-using MoonlapseServer.App.Packets;
-using MoonlapseServer.Core.Services;
-using MoonlapseServer.Core.Sessions;
-using MoonlapseServer.Core.Sessions.States;
+using Moonlapse.Shared.Packets;
+using Moonlapse.Core.Services;
+using Moonlapse.Core.Sessions;
+using Moonlapse.Core.Sessions.States;
 
-namespace MoonlapseServer.App.Controllers; 
+namespace Moonlapse.App.Controllers; 
 public class PlayController(IMovementService movement) : Controller {
     readonly IMovementService movement = movement;
 

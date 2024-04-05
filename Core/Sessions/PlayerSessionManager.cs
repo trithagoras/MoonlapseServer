@@ -1,6 +1,6 @@
 ﻿using MmoNet.Core.Sessions;
 
-namespace MoonlapseServer.Core.Sessions;
+namespace Moonlapse.Core.Sessions;
 public class PlayerSessionManager : IPlayerSessionManager {
     readonly Dictionary<Guid, ISession> sessions = [];
 

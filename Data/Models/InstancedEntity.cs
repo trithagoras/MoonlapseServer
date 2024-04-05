@@ -1,4 +1,4 @@
-﻿namespace MoonlapseServer.Data.Models;
+﻿namespace Moonlapse.Data.Models;
 public class InstancedEntity {
     public int Id { get; set; }
     public virtual required Entity Entity { get; set; }

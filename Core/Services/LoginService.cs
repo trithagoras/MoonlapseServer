@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoonlapseServer.Core.Exceptions;
-using MoonlapseServer.Core.Sessions;
-using MoonlapseServer.Core.Sessions.States;
-using MoonlapseServer.Data.DbContexts;
-using MoonlapseServer.Data.Models;
+using Moonlapse.Core.Exceptions;
+using Moonlapse.Core.Sessions;
+using Moonlapse.Core.Sessions.States;
+using Moonlapse.Data.DbContexts;
+using Moonlapse.Data.Models;
 
-namespace MoonlapseServer.Core.Services;
+namespace Moonlapse.Core.Services;
 public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbContext db) : ILoginService {
     readonly IPlayerSessionManager sessionManager = sessionManager;
     readonly MoonlapseDbContext db = db;

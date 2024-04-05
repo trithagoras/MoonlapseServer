@@ -3,9 +3,9 @@ using Microsoft.Extensions.Logging;
 using MmoNet.Core.Network.Protocols;
 using MmoNet.Core.ServerApp.Exceptions;
 using MmoNet.Shared.Packets;
-using MoonlapseServer.Core.Exceptions;
+using Moonlapse.Core.Exceptions;
 
-namespace MoonlapseServer.App;
+namespace Moonlapse.App;
 public class MoonlapseExceptionFilter(IProtocolLayer protocol, ILogger<MoonlapseExceptionFilter> logger) : ExceptionFilter(protocol) {
     readonly ILogger<MoonlapseExceptionFilter> logger = logger;
     readonly IProtocolLayer protocol = protocol;

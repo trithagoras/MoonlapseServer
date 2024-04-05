@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoonlapseServer.Data.Models;
+using Moonlapse.Data.Models;
 
-namespace MoonlapseServer.Data.DbContexts; 
+namespace Moonlapse.Data.DbContexts; 
 public partial class MoonlapseDbContext {
     public DbSet<User> Users { get; set; }
 }

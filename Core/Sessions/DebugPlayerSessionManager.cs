@@ -1,6 +1,6 @@
 ﻿using MmoNet.Core.Sessions;
 
-namespace MoonlapseServer.Core.Sessions;
+namespace Moonlapse.Core.Sessions;
 public class DebugPlayerSessionManager : IPlayerSessionManager {
     readonly Dictionary<Guid, ISession> sessions = [];
     int Seed => 1 + sessions.Count;

@@ -1,10 +1,9 @@
 ﻿using MmoNet.Core.Sessions;
 using MmoNet.Core.States;
-using MoonlapseServer.Core.Sessions.States;
-using MoonlapseServer.Data.Models;
-using System.Numerics;
+using Moonlapse.Core.Sessions.States;
+using Moonlapse.Data.Models;
 
-namespace MoonlapseServer.Core.Sessions;
+namespace Moonlapse.Core.Sessions;
 public class PlayerSession(Guid id) : ISession {
     public Guid Id { get; } = id;
     public ISessionState State { get; private set; } = new EntryState();
