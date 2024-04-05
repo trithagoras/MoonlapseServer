@@ -6,7 +6,6 @@ using MoonlapseServer.App.Packets;
 using MoonlapseServer.Core.Services;
 using MoonlapseServer.Core.Sessions;
 using MoonlapseServer.Core.Sessions.States;
-using System.Numerics;
 
 namespace MoonlapseServer.App.Controllers; 
 public class PlayController(IMovementService movement) : Controller {

@@ -4,4 +4,6 @@ public class User {
     public required string Username { get; set; }
     public required string PasswordHash { get; set; }
     public virtual required Player Player { get; set; }
+    public required DateTime CreatedAt { get; set; }
+    public DateTime? LastLoggedInAt { get; set; }
 }

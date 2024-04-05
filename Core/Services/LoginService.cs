@@ -1,4 +1,5 @@
-﻿using MoonlapseServer.Core.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using MoonlapseServer.Core.Exceptions;
 using MoonlapseServer.Core.Sessions;
 using MoonlapseServer.Core.Sessions.States;
 using MoonlapseServer.Data.DbContexts;
@@ -11,7 +12,7 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
 
     public async Task LoginAsync(PlayerSession session, string username, string password) {
         // check if the username exists
-        var user = db.Users.FirstOrDefault(u => u.Username == username) ?? throw new EntryException("Username or password is incorrect.");
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Username == username) ?? throw new EntryException("Username or password is incorrect.");
 
         // check if the password is correct
         if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) {
@@ -19,6 +20,8 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
         }
 
         session.Player = user.Player;
+        user.LastLoggedInAt = DateTime.UtcNow;
+        await db.SaveChangesAsync();
         session.ChangeState<PlayState>();
     }
 
@@ -28,7 +31,7 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
 
     public async Task RegisterAsync(string username, string password) {
         // check if the username is already taken
-        var user = db.Users.FirstOrDefault(u => u.Username == username);
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Username == username);
         if (user != null) {
             throw new EntryException($"Username: {username} is already taken.");
         }
@@ -39,9 +42,10 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
         db.Users.Add(new User {
             Username = username,
             PasswordHash = hashedPassword,
-            Player = CreatePlayer(username)
+            Player = CreatePlayer(username),
+            CreatedAt = DateTime.UtcNow
         });
-        db.SaveChanges();
+        await db.SaveChangesAsync();
     }
 
     Player CreatePlayer(string username) {
