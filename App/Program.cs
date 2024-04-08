@@ -31,7 +31,7 @@ var serverBuilder = new ServerBuilder();
 
 // essential services
 serverBuilder.Services.AddProtocolLayer<TcpLayer>();
-serverBuilder.Services.AddSerializer<JsonSerializer>();
+serverBuilder.Services.AddSerializer<JsonSerializer>();     // TODO: MESSAGEPACK
 serverBuilder.Services.AddPlayerSessionManager(debug);
 serverBuilder.Services.AddLogging(o => o.AddConsole());
 serverBuilder.Services.AddPacketRegistry<PacketRegistry>();
@@ -46,4 +46,4 @@ serverBuilder.Services.AddSingleton<IMovementService, MovementService>();
 Assembly.Load("Moonlapse.Shared");
 
 var (app, _) = serverBuilder.Build();
-await app.StartAsync(42523);
+await app.StartAsync(42523, 20);

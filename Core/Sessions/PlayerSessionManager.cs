@@ -28,4 +28,13 @@ public class PlayerSessionManager : IPlayerSessionManager {
     public void RemoveSession(Guid id) {
         sessions.Remove(id);
     }
+
+    public PlayerSession? GetSessionByUsername(string username) {
+        foreach (var session in sessions.Values) {
+            if (session is PlayerSession playerSession && playerSession.Instance?.Entity.Name == username) {
+                return playerSession;
+            }
+        }
+        return null;
+    }
 }

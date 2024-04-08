@@ -37,4 +37,13 @@ public class DebugPlayerSessionManager : IPlayerSessionManager {
 
         return new Guid(guid);
     }
+
+    public PlayerSession? GetSessionByUsername(string username) {
+        foreach (var session in sessions.Values) {
+            if (session is PlayerSession playerSession && playerSession.Instance?.Entity.Name == username) {
+                return playerSession;
+            }
+        }
+        return null;
+    }
 }

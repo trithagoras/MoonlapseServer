@@ -14,6 +14,11 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
         // check if the username exists
         var user = await db.Users.FirstOrDefaultAsync(u => u.Username == username) ?? throw new EntryException("Username or password is incorrect.");
 
+        // check if user is already logged in TODO: this better
+        if (sessionManager.GetSessionByUsername(username) != null) {
+            throw new EntryException("User is already logged in.");
+        }
+
         // check if the password is correct
         if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash)) {
             throw new EntryException("Username or password is incorrect.");
