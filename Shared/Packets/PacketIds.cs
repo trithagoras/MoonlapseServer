@@ -5,5 +5,7 @@
         RegisterPacket,
         MovePacket,
         PositionPacket,
+        PlayerJoinedPacket,
+        PlayerLeftPacket,
     }
 }

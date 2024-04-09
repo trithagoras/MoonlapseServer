@@ -13,4 +13,8 @@ public class PlayerSession(Guid id) : ISession {
     public void ChangeState<TState>() where TState : ISessionState, new() {
         State = new TState();
     }
+
+    public void Logout() {
+        Player = null;
+    }
 }
