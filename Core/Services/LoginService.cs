@@ -61,7 +61,8 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
                     Name = username
                 },
                 X = 0,
-                Y = 0
+                Y = 0,
+                MoveSpeed = 3f
             }
         };
     }

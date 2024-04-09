@@ -4,4 +4,5 @@ public class InstancedEntity {
     public virtual required Entity Entity { get; set; }
     public required float X { get; set; }
     public required float Y { get; set; }
+    public float? MoveSpeed { get; set; }
 }

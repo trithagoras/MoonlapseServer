@@ -19,11 +19,12 @@ public class MovementService : IMovementService {
     }
 
     public void BeginTranslate(int instanceId, float dx, float dy) {
-        var moveSpeed = 3f; // TODO: need to store speed in DB somewhere
+        var instance = db.InstancedEntities.Single(i => i.Id == instanceId);
         var move = new Vector2(dx, dy);
+
+        // cannot normalize 0 vector
         if (move != Vector2.Zero) {
-            // cannot normalize 0 vector
-            var velocity = moveSpeed * Vector2.Normalize(move);
+            var velocity = instance.MoveSpeed * Vector2.Normalize(move) ?? Vector2.Zero;
             movementStates[instanceId] = velocity;
         } else {
             movementStates[instanceId] = Vector2.Zero;
