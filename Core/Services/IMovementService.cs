@@ -3,5 +3,5 @@ using System.Numerics;
 
 namespace Moonlapse.Core.Services; 
 public interface IMovementService {
-    Task Translate(InstancedEntity instance, float dx, float dy);
+    void BeginTranslate(int instanceId, float dx, float dy);
 }

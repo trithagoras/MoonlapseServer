@@ -20,6 +20,8 @@ var debug = false;
     debug = true;
 #endif
 
+var tickRate = int.Parse(env["TICK_RATE"]);
+
 // configuring database connection
 var onConfigure = (DbContextOptionsBuilder optionsBuilder) => {
     var connectionString = env["CONNECTION_STRING"];
@@ -45,5 +47,5 @@ serverBuilder.Services.AddSingleton<IMovementService, MovementService>();
 // preloading assembly to register packets during server build process
 Assembly.Load("Moonlapse.Shared");
 
-var (app, _) = serverBuilder.Build();
-await app.StartAsync(42523, 20);
+var (app, _) = serverBuilder.Build(tickRate);
+await app.StartAsync(42523);

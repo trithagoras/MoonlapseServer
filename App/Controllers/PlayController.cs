@@ -13,7 +13,7 @@ public class PlayController(IMovementService movement) : Controller {
 
     [RequiresState<PlayState>]
     public async Task<IPacket> Move(MovePacket packet, [FromSession] PlayerSession session) {
-        await movement.Translate(session.Instance, packet.Dx, packet.Dy);
+        movement.BeginTranslate(session.Instance.Id, packet.Dx, packet.Dy);
 
         // return authoritive position packet
         return new PositionPacket {

@@ -31,6 +31,7 @@ public class LoginService(IPlayerSessionManager sessionManager, MoonlapseDbConte
     }
 
     public async Task LogoutAsync(PlayerSession session) {
+        await db.SaveChangesAsync();
         session.ChangeState<EntryState>();
     }
 
